@@ -16,12 +16,14 @@ class NetworkMonitor:
         self.bytes_before = psutil.net_io_counters().bytes_sent
     def stop(self):
         self.bytes_after = psutil.net_io_counters().bytes_sent
+
         bytes_sent = self.bytes_after - self.bytes_before
-        if NETWORK_THRESHOLD == 0:
-            is_local = bytes_sent <= NETWORK_THRESHOLD
+
+        is_local = bytes_sent <= NETWORK_THRESHOLD
 
         return NetworkResult(
-    is_local=is_local,
-    bytes_before=self.bytes_before,
-    bytes_after=self.bytes_after,
-    bytes_sent=bytes_sent)
+        is_local=is_local,
+        bytes_before=self.bytes_before,
+        bytes_after=self.bytes_after,
+        bytes_sent=bytes_sent
+        )

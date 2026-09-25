@@ -19,10 +19,7 @@ def evaluate_policy(validation_ok: bool,
         reason="PP-02 Failed: Outbound network activity detected."
         )
     if not logger_ok:
-        return PolicyResult(
-        decision=DECISION_ALLOW,
-        reason="PP-03 Warning: Logging unavailable."
-    )
+        print("Warning: Privacy event could not be logged.")
     return PolicyResult(
     decision=DECISION_ALLOW,
     reason="All privacy policies satisfied."
