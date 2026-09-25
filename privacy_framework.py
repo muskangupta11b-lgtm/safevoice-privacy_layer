@@ -87,18 +87,18 @@ def run_privacy_framework(audio):
 
     # 4. Evaluate privacy policy
     policy = evaluate_policy(
-        validation.is_valid,
-        network.is_local,
-        True  # logger is available
-    )
+    validation.is_valid,
+    network.is_local
+)
 
-    # 5. Log the event
-    log_event(
+    try:
+        log_event(
         validation_result=("PASS" if validation.is_valid else "FAIL"),
         decision=policy.decision,
         reason=policy.reason
     )
-
+    except Exception:
+        print("Warning: Privacy event could not be logged.")
     # 6. Return complete result
     return PrivacyResult(
         audio=audio,
